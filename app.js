@@ -1,7 +1,8 @@
 (async () => {
+  const { createFFmpeg } = FFmpeg
 
   async function mergeVideo(video, audio) {
-      let { createFFmpeg, fetchFile } = require("@ffmpeg/ffmpeg");
+      let { createFFmpeg, fetchFile } = FFmpeg;
       let ffmpeg = createFFmpeg();
       await ffmpeg.load();
       await ffmpeg.run('-i', video, '-i', audio, '-c', 'copy', 'output.mp4');
