@@ -5,7 +5,9 @@
         let { createFFmpeg, fetchFile } = FFmpeg;
         let ffmpeg = createFFmpeg();
         await ffmpeg.load();
-        await ffmpeg.run('-i', video, '-i', audio, '-c', 'copy', 'output.mp4');
+        ffmpeg.FS('writeFile', 'video.mp4', await fetchFile(video));
+        ffmpeg.FS('writeFile', 'audio.mp3', await fetchFile(audio));
+        await ffmpeg.run('-i', 'video.mp4', '-i', 'audio.mp3', '-c', 'copy', 'output.mp4');
         const data = ffmpeg.FS('readFile', 'output.mp4')
         return data
     };
