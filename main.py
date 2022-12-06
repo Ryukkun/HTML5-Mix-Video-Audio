@@ -8,4 +8,4 @@ class CORSRequestHandler (server.SimpleHTTPRequestHandler):
         server.SimpleHTTPRequestHandler.end_headers(self)
 
 if __name__ == '__main__':
-    server.main(HandlerClass=CORSRequestHandler)
+    server.test(HandlerClass=CORSRequestHandler)
