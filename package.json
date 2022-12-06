@@ -1,0 +1,13 @@
+{
+    "name": "ffmpeg-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+      "@ffmpeg/core": "^0.11.6",
+      "@ffmpeg/ffmpeg": "^0.11.6"
+    }
+  }
