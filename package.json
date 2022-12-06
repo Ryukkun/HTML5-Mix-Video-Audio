@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
+    "scripts": {
+        "run": "node --experimental-wasm-threads --experimental-wasm-bulk-memory main.js"
+    },
     "keywords": [],
     "author": "",
     "license": "MIT",
