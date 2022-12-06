@@ -6,7 +6,7 @@
       let ffmpeg = createFFmpeg();
       await ffmpeg.load();
       await ffmpeg.run('-i', video, '-i', audio, '-c', 'copy', 'output.mp4');
-      const data = ffmpeg.read('output.mp4')
+      const data = ffmpeg.FS('readFile', 'output.mp4')
       return data
   };
 
@@ -17,16 +17,6 @@
     return objectUrl
   }
 
-  function insertVideo(src) {
-    const video = document.createElement('video')
-    video.controls = true
-
-    video.onloadedmetadata = () => {
-      document.body.appendChild(video)
-    }
-
-    video.src = src
-  }
 
   const div = document.createElement('div')
   div.innerText = '動画生成中'
@@ -36,8 +26,9 @@
   var video = "https://rr2---sn-oguelnzs.googlevideo.com/videoplayback?expire=1670312633&ei=WZ6OY924KZuBvcAP5IWruAs&ip=121.102.228.168&id=o-AC5ZkR8ajFZ0q954CHRVC0qUlIY6a9wsy9L2z2Qo8NBo&itag=140&source=youtube&requiressl=yes&mh=Et&mm=31%2C26&mn=sn-oguelnzs%2Csn-3pm76nes&ms=au%2Conr&mv=m&mvi=2&pl=17&initcwndbps=1105000&vprv=1&mime=audio%2Fmp4&ns=-eLMuP9OTlMgMsqkEYrSwsMJ&gir=yes&clen=3381816&dur=208.909&lmt=1667864461426288&mt=1670290627&fvip=3&keepalive=yes&fexp=24001373%2C24007246&c=TVHTML5_SIMPLY_EMBEDDED_PLAYER&txp=5532434&n=FY8vtfs5S07dfQ&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgKHRKIZto-rU28EQzLAJyajURxKG7x3Xt-ow7AeFSvMgCIBUvRayJZoBLLsSOnil-jMqHmWt4J0v8xSuSbQK2iT7a&sig=AOq0QJ8wRQIhAOijFboCz4jFu93ViDWksRQqOb8yebNWniPUAVHZIITQAiBy-muJLtaNJpXQe_DvxJdj2OhpBfz601gBq2NY0LemJA%3D%3D"
   
   const _video = await mergeVideo(video,audio)
-  const objectUrl = createObjectUrl([_video], { type: 'video/mp4' })
-  insertVideo(objectUrl)
+  //const objectUrl = createObjectUrl([_video], { type: 'video/mp4' })
+  const __video = document.getElementById('output-video');
+  __video.src = URL.createObjectURL(new Blob([_video.buffer], { type: 'video/mp4' }));
 
   document.body.removeChild(div)
 })()
